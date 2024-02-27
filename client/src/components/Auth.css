@@ -1,0 +1,24 @@
+  .auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.google-signin-button {
+  background-color: #4285f4;
+  color: #fff;
+  border: 1px solid #4285f4;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.1s, color 0.3s;
+}
+
+.google-signin-button:hover {
+  background-color: #fff;
+  color: #4285f4;
+  font-weight: 600;
+}

@@ -7,6 +7,7 @@ import {
   signinFailure,
 } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Auth from "./Auth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -90,6 +91,7 @@ const SignIn = () => {
           Sign Up
         </Link>
       </div>
+      <Auth />
     </div>
   );
 };

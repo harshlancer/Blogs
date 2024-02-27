@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import "./signUp.css";
+import Auth from "./Auth";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -111,6 +112,7 @@ const Signup = () => {
             SignIn
           </Link>
         </div>
+        <Auth></Auth>
       </div>
     </div>
   );

@@ -15,10 +15,12 @@ mongoose
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:3001',
-  credentials: true // If you need to send cookies or authentication headers
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    credentials: true, // If you need to send cookies or authentication headers
+  })
+);
 
 app.use(express.json());
 
@@ -32,6 +34,7 @@ app.use("/api/auth", authRoute);
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "internal error";
+  console.error(err); // Log the error
   res.status(statusCode).json({
     success: false,
     message,
