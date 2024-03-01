@@ -10,6 +10,9 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import Dashboard from "./components/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
+import { useState } from "react";
 
 const App = () => {
   return (
@@ -50,6 +53,9 @@ const App = () => {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/about" element={<About />} />
           <Route path="/footer" element={<Footer />} />
+          <Route element={<PrivateRoute/>}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
         </Routes>
         <Footer />
       </div>
