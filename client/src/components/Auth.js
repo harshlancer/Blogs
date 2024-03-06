@@ -31,13 +31,14 @@ function Auth() {
         body: JSON.stringify({
           name: user.displayName,
           email: user.email,
-          googlePhotoUrl: user.photoURL,
+          profilePicture: user.photoURL,
         }),
       });
-      const data = await res.json();
-      console.log("User signed in:", user);
+      const userData = await res.json();
+      console.log("User signed in:", userData);
       if (res.ok) {
-        dispatch(signinSuccess(data));
+        dispatch(signinSuccess(userData));
+        console.log(userData);
         navigate("/");
       }
     } catch (error) {

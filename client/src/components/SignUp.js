@@ -25,22 +25,21 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true); // Set loading state to true
     try {
-      const res = await fetch("http://localhost:3000/api/auth/singup", {
+      const res = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" }, // Corrected header
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      if (data.success === false) {
-        return setErrorMsg(data.message);
+      const userData = await res.json();
+      if (userData.success === false) {
+        return setErrorMsg(userData.message);
       }
-      console.log(data); // Log response data
+      console.log(userData); // Log response data
       setLoading(false); // Set loading state to false after successful request
       if (res.ok) {
-        navigate("/signin"); // Use navigate function to redirect
+        navigate("/"); // Use navigate function to redirect
       }
     } catch (error) {
-      console.error("Error:", error); // Log and handle error
       setErrorMsg(error.message); // Set error message
       setLoading(false); // Set loading state to false after error
     }

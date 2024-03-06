@@ -1,4 +1,3 @@
-/* App.css */
 body {
   margin: 0;
   padding: 0;
@@ -14,11 +13,26 @@ body {
   padding: 20px;
 }
 
+.profilePicture{
+  width: 30px; /* Adjust the size as needed */
+  height: 30px; /* Adjust the size as needed */
+  margin-right: 10px; /* Add some spacing between the image and the link */
+  border-radius: 50%;
+  transition: linear 0.5s;
+  
+}
+
+.profilePicture:hover{
+  scale: 1.3 ;
+  cursor: pointer;
+}
+
 .nav {
   background-color: #333;
   padding: 10px 0;
   border-radius: 5px;
   width: 100%;
+  
 }
 
 .nav ul {
@@ -27,6 +41,8 @@ body {
   padding: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+
 }
 
 .nav ul li {

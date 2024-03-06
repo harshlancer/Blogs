@@ -15,7 +15,8 @@ const userSlice = createSlice({
       state.error = null;
     },
     signinSuccess: (state, action) => {
-      state.currentUser = action.payload;
+      const { profilePicture, ...userData } = action.payload;
+      state.currentUser = { ...userData }; // Include profilePicture in currentUser
       state.loading = false;
       state.error = null;
     },

@@ -36,17 +36,18 @@ const SignIn = () => {
         headers: { "Content-Type": "application/json" }, // Corrected header
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signinFailure(data.message));
+      const userData = await res.json();
+      if (userData.success === false) {
+        dispatch(signinFailure(userData.message));
       }
       if (res.ok) {
         // If response status is okay, sign-in was successful
-        dispatch(signinSuccess(data));
+        dispatch(signinSuccess(userData));
+        console.log(userData)
         navigate("/");
       } else {
         // If response status is not okay, handle error
-        dispatch(signinFailure(data.message));
+        dispatch(signinFailure(userData.message));
       }
     } catch (error) {
       dispatch(signinFailure(error.message));

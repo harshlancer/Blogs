@@ -1,6 +1,7 @@
 import React from "react";
-import "./App.css"; // Make sure the path to your CSS file is correct
+import "./App.css";
 import { Route, Routes, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Home from "./components/Home";
 import Investment from "./components/Investment";
 import Trading from "./components/Trading";
@@ -12,9 +13,10 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import { useState } from "react";
 
 const App = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const profilePicture = currentUser?.userData?.profilePicture;
   return (
     <div className="home">
       <nav className="nav">
@@ -34,28 +36,40 @@ const App = () => {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
-          <li>
-            <Link to="/signUp">SignUp</Link>
-          </li>
-          <li>
-            <Link to="/signIn">SignIn</Link>
-          </li>
+          {currentUser ? (
+            <>
+              <img className="profilePicture" src={profilePicture} />
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/signUp">SignUp</Link>
+              </li>
+              <li>
+                <Link to="/signIn">SignIn</Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/investment" element={<Investment />} />
           <Route path="/trading" element={<Trading />} />
           <Route path="/learning" element={<Learning />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/signIn" element={<SignIn />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
           <Route path="/about" element={<About />} />
-          <Route path="/footer" element={<Footer />} />
-          <Route element={<PrivateRoute/>}>
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
+          <Route path="/" element={<Home />} />
         </Routes>
         <Footer />
       </div>

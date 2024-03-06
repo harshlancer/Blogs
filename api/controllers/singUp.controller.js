@@ -2,7 +2,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const JWTsecret = "wetsofwater";
+const JWTsecret = "wetsofwater"; // Change to a more secure secret key
 
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -11,7 +11,10 @@ export const signup = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
-    res.json({ message: "SignUp successfully" });
+    res.json({
+      message: "SignUp successfully",
+      userData: { profilePicture: newUser.profilePicture },
+    }); // Include profile picture in the response
   } catch (error) {
     next(error);
   }
@@ -31,30 +34,32 @@ export const signin = async (req, res, next) => {
       return res.status(401).json({ message: "Incorrect Password" });
     }
 
-    const token = jwt.sign({ id: validUser._id }, JWTsecret);
+    const userData = {
+      id: validUser._id,
+      profilePicture: validUser.profilePicture,
+    }; // Include profilePicture
 
     res
       .status(200)
-      .cookie("access_token", token, {
+      .cookie("access_token", jwt.sign({ id: validUser._id }, JWTsecret), {
         httpOnly: true,
       })
-      .json({ message: "Valid User", token });
+      .json({ message: "Valid User", userData });
   } catch (error) {
     next(error);
   }
 };
 
 export const google = async (req, res, next) => {
-  const { username, email, googlePhotoUrl } = req.body;
+  const { username, email, profilePicture } = req.body;
+
   try {
     const user = await User.findOne({ email });
     if (user) {
       const token = jwt.sign({ id: user._id }, JWTsecret);
       res
         .status(200)
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
+        .cookie("access_token", token, { httpOnly: true })
         .json({ message: "User signed in with Google" });
     } else {
       const generatedPassword = Math.random().toString(36).slice(-8);
@@ -67,15 +72,17 @@ export const google = async (req, res, next) => {
         username: newUsername,
         email,
         password: hashedPassword,
-        profilePicture: googlePhotoUrl,
+        profilePicture: profilePicture,
       });
       await newUser.save();
+      res.json({
+        message: "SignUp successfully",
+        userData: { profilePicture: newUser.profilePicture },
+      });
       const token = jwt.sign({ id: newUser._id }, JWTsecret);
       res
         .status(200)
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
+        .cookie("access_token", token, { httpOnly: true })
         .json({ message: "User created and signed in with Google" });
     }
   } catch (error) {
