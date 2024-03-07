@@ -1,0 +1,115 @@
+/* Shared Styles */
+.sidebar,
+.footer {
+  height: fit-content; /* Allow content to define height */
+  display: flex; /* Enable flexbox for both sidebar and footer */
+  align-items: center; /* Vertically center content within elements */
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed; /* Keep sidebar fixed on the screen */
+  top: 20;
+  left: 10;
+  width: 200px; /* Adjust width as needed */
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Light text color */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  transition: all 0.1s ease-in-out; /* Smooth transition effects */
+  border-radius: 20px;
+  height: 50vh;
+}
+
+.sidebar ul {
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.sidebar li {
+  margin: 10px 0; /* Add space between list items */
+}
+
+.sidebar a {
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit text color from sidebar */
+  font-weight: bold; /* Bold text for emphasis */
+  transition: all 0.2s ease-in-out; /* Smooth hover effect */
+    padding: 5px 20px;
+    text-align: left;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+    border-radius: 5px;/* Change link color on hover (blue) */
+}
+
+/* Icon Styling (assuming icons are within <img> tags) */
+.sidebar li img {
+  margin-right: 10px; /* Add margin between icons and text */
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap */
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the start of the cross axis */
+    width: calc(100% - 50px); /* Span full width minus left and right margin */
+    position: fixed;
+    bottom: 0;
+    left: 25px;
+    right: 25px;
+    border-radius: 20px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap; /* Allow flex items to wrap */
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to the start of the cross axis */
+}
+
+.footer-section {
+  flex-basis: calc(50% - 10px); /* Set each section to occupy 50% of the container width with some margin */
+  margin-bottom: 20px; /* Add margin between sections */
+}
+
+.footer-section h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.aboutlink {
+  color: #fff;
+  text-decoration: none;
+}
+
+.aboutlink:hover {
+  color: #aaa;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-links li {
+  margin-bottom: 10px;
+}
+
+.social-links li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.social-links li a:hover {
+  color: #aaa;
+}

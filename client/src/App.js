@@ -13,6 +13,8 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import DashProfile from "./components/DashProfile";
+import DashSidebar from "./components/DashSidebar";
 
 const App = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -92,8 +94,8 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<DashProfile />} />
         </Routes>
-        <Footer />
       </div>
     </div>
   );
