@@ -70,3 +70,45 @@ body {
   width: 100%;
   padding-bottom: 60px; /* Adjust this value according to the height of your footer */
 }
+.dropdown-menu {
+  /* Hide the menu by default */
+  display: grid;
+  flex-direction: column;
+  
+  /* Position the menu absolutely relative to its parent */
+  position: absolute;
+  
+  /* Set a background color */
+  background-color: #565656;
+  
+  /* Add some padding for content */
+  padding: 10px;
+  
+  /* Add a border for visual separation */
+  border: 1px solid #ddd;
+  
+  /* Add a slight shadow for depth */
+  box-shadow: 0px 2px 5px rgba(208, 195, 195, 0.1);
+  
+  /* List style for the menu items */
+  list-style: none;
+  
+  /* Remove default margin for list items */
+  margin: 0;
+}
+
+/* Show the menu when the parent element (profile picture) is hovered */
+.dropdown-menu ul {
+  display: grid;
+  grid-template-columns: auto; /* Adjust column width as needed */
+  gap: 10px; /* Add gap between menu items */
+  text-align: left;
+}
+
+.profile-dropdown:hover .dropdown-menu {
+  display: block; /* Change from flex to block */
+}
+.dropdown-menu ul li + li {
+  border-top: 1px solid #ddd;
+  padding-top: 10px; /* Adjust as needed for spacing */
+}

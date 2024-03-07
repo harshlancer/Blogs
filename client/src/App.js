@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Route, Routes, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,7 +16,13 @@ import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const username = currentUser?.userData?.username;
   const profilePicture = currentUser?.userData?.profilePicture;
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownClick = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   return (
     <div className="home">
       <nav className="nav">
@@ -37,9 +43,31 @@ const App = () => {
             <Link to="/contact">Contact</Link>
           </li>
           {currentUser ? (
-            <>
-              <img className="profilePicture" src={profilePicture} />
-            </>
+            <div className="profile-dropdown-div">
+              <ul>
+                <li className="profile-dropdown">
+                  <img
+                    className="profilePicture"
+                    src={profilePicture}
+                    onClick={handleDropdownClick}
+                    alt="Profile Picture"
+                  />
+                  {isDropdownOpen && (
+                    <div className="dropdown-menu">
+                      <ul>
+                        <li>Hello {username.toUpperCase()}</li>
+                        <li>
+                          <Link to="/dashboard">Dashboard</Link>
+                        </li>
+                        <li>
+                          <Link to="/logout">Logout</Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </li>
+              </ul>
+            </div>
           ) : (
             <>
               <li>
@@ -52,6 +80,7 @@ const App = () => {
           )}
         </ul>
       </nav>
+
       <div className="content">
         <Routes>
           <Route path="/investment" element={<Investment />} />
@@ -60,14 +89,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/signIn" element={<SignIn />} />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/" element={<Home />} />
         </Routes>

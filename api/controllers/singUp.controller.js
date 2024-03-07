@@ -13,7 +13,10 @@ export const signup = async (req, res, next) => {
     await newUser.save();
     res.json({
       message: "SignUp successfully",
-      userData: { profilePicture: newUser.profilePicture },
+      userData: {
+        username: newUser.username,
+        profilePicture: newUser.profilePicture,
+      },
     }); // Include profile picture in the response
   } catch (error) {
     next(error);
@@ -36,6 +39,8 @@ export const signin = async (req, res, next) => {
 
     const userData = {
       id: validUser._id,
+      username: validUser.username,
+
       profilePicture: validUser.profilePicture,
     }; // Include profilePicture
 
@@ -77,7 +82,10 @@ export const google = async (req, res, next) => {
       await newUser.save();
       res.json({
         message: "SignUp successfully",
-        userData: { profilePicture: newUser.profilePicture },
+        userData: {
+          username: newUser.username,
+          profilePicture: newUser.profilePicture,
+        },
       });
       const token = jwt.sign({ id: newUser._id }, JWTsecret);
       res
